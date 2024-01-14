@@ -1,2 +1,2 @@
 # obsidian-stuff
-Obsidian templates and css I've created to customized the app.
+You'll find a variety to templates, parts, snippets, CSS, and other things providing actual code or examples of how I've customized Obsidian for my specific needs. The goal here 2 parts: 1) if you don't know markdown, templater, dataview, etc, you should be able to copy/paste these into your notes without much fuss if they're exactly what you need. 2) If you know enough about those plugins and languages that make Obsidian do more things, you can adapt what I provide to suit your purpose, modifying and changing to your hearts desire.
