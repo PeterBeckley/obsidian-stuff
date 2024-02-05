@@ -1,0 +1,109 @@
+/* Most of my customizations for Obsidian via CSS are here */
+
+/* Learn more if you need to - https://www.nordtheme.com/docs/colors-and-palettes 
+I don't use these currently, just too lazy to remove in case I have ref'd them somewhere*/
+:root{
+	--nord0: #2e3440;
+	--nord1: #3b4252;
+	--nord2: #434c5e;
+	--nord3: #4c566a;
+	--nord4: #d8dee9;
+	--nord5: #e5e9f0;
+	--nord6: #eceff4;
+	--nord7: #8fbcbb;
+	--nord8: #88c0d0;
+	--nord9: #81a1c1;
+	--nord10: #5e81ac;
+	--nord11: #bf616a;
+	--nord12: #d08770;
+	--nord13: #ebcb8b;
+	--nord14: #a3be8c;
+	--nord15: #b48ead;
+}
+
+/* I want to see the weekends, no one has options to see these anymore, not gMail, Outlook, or anything in Obsidian. */
+#calendar-container .weekend {
+  background-color: #2E3132 !important;	
+}
+/* Better dot colors for my Minimal theme config */
+.dot.filled { fill: #647B83 !important;
+}
+.hollow.task {stroke: #009EBC !important;
+}
+
+#calendar-container tr td {
+	border-radius: 0px !important;
+}
+
+.callout {
+	margin:0;
+}
+
+/* Turning tasks backlink into an emoji instead of written text. Much cleaner interface. See my Tasks - Compact.css for the rest of the compactness styling */
+
+.tasks-backlink {
+    color: #191C1D;
+}
+
+.tasks-backlink a.internal-link {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'%3E%3C/path%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'%3E%3C/path%3E%3C/svg%3E");
+	height: .9em;
+	opacity: 0.6;
+}
+
+.tasks-backlink a.internal-link:hover { opacity:1;}
+
+/* I used to color code my main tags, but I don't anymore. Kept here in case I change my mind because ya never know */
+.cm-tag-journaldaily, .cm-tag-journalweekly, .cm-tag-journalmonthly, .cm-tag-journalyearly, span[class*=cm-tag-journal], .tag[href*="#journal"] {
+  /* background-color: var(--nord14) !important; */
+  /* color: #B2CAD3; */
+}
+span[class*=cm-tag-task], .tag[href*="#task"]  {
+  /* background-color: var(--nord3) !important; */
+  /* color: #E99B19; */
+}
+span[class*=cm-tag-area], .tag[href*="#area"] {
+  /* background-color: var(--nord3) !important; */
+  /* color: #A5A9CE; */
+}
+span[class*=cm-tag-on], .tag[href*="#on"] {
+  /* background-color: var(--nord3) !important; */
+  /* color: #CEFFB8; */
+}
+span[class*=cm-tag-project], .tag[href*="#project"] {
+  /* background-color: var(--nord3) !important; */
+  /* color: #58D6F7; */
+}
+span[class*=cm-tag-idea], .tag[href*="#idea"] {
+  /* background-color: var(--nord3) !important; */
+  /* color: #FF897F; */
+}
+span[class*=cm-tag-source], .tag[href*="#source"] {
+  /* background-color: var(--nord3) !important; */
+  /* color: #FF897F; */
+}
+span[class*=cm-tag-reference], .tag[href*="#reference"], span[class*=cm-tag-archive], .tag[href*="#archive"] {
+  /* background-color: var(--nord3) !important; */
+  /* color: #A9ABAD; */
+}
+
+/* I USE HIDER PLUGIN SO THIS ISN'T NEEDED NOW
+Show Properties in reading mode by default.
+Use "hide_properties" in `css_classes` property to hide them.
+============================================================= */
+/* .workspace-leaf-content[data-mode="preview"]
+.markdown-preview-view.hide_properties
+.metadata-container{
+    display: none;
+} */
+
+/* Psudo 'Swimlanes' for Kanban, wish the Dev would implement this (and better)! */
+
+.kanban-plugin__board > div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 40px;
+}
+.kanban-plugin__scroll-container.kanban-plugin__horizontal {
+    overflow-y: auto;
+}
