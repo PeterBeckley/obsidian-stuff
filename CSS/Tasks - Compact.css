@@ -1,6 +1,6 @@
 /*
     Tasks: Compact
-    Colour-based priority status. Show dates on hover. Monochrome emojis.
+    Color-based priority status. Show dates on hover. Monochrome emojis.
 
     Original credit to @sunb_mn on Obsidian's discord server for 
     the basis of these styles which saved me a bit of time:
@@ -147,17 +147,39 @@ input[type=checkbox]:checked {
 
 /* Edit button */
 .tasks-edit {
-    background-color: var(--tx1, var(--text-normal));
     /* https://caniuse.com/?search=mask-image */
-    -webkit-mask-image: url('data:image/svg+xml,<svg enable-background="new 0 0 24 28" viewBox="0 0 24 28" xmlns="http://www.w3.org/2000/svg"><path d="m22 12c-.3 0-.5-.1-.7-.3l-4-4c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l4 4c.4.4.4 1 0 1.4-.2.2-.4.3-.7.3z"/><path d="m2 28c-.3 0-.5-.1-.7-.3-.3-.3-.4-.6-.3-1l1.5-5.5c0-.2.1-.3.3-.4l11.5-11.5c.4-.4 1-.4 1.4 0l4 4c.4.4.4 1 0 1.4l-11.5 11.5c-.1.1-.3.2-.4.3l-5.5 1.5c-.1 0-.2 0-.3 0zm2.4-6-1 3.6 3.6-1 10.6-10.6-2.6-2.6z"/></svg>');
-    -webkit-mask-size: 85%;
-    -webkit-mask-position: 0 -3px;
-    -webkit-mask-repeat: no-repeat;
-    transform: translate(0,-1px);
-    opacity:0.6;
-    margin-left:5px;
+    -webkit-mask-image: url('data:image/svg+xml,<svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>');
 }
 
-.tasks-edit:hover {
-    opacity: 1;
+/* Postpone button */
+.tasks-postpone {
+    /* https://caniuse.com/?search=mask-image */
+    -webkit-mask-image: url('data:image/svg+xml,<svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="13 19 22 12 13 5 13 19"/><polygon points="2 19 11 12 2 5 2 19"/></svg>');
 }
+
+/* Backlink button */
+.tasks-backlink {
+    text-indent:100%;
+	white-space: nowrap;
+    overflow: hidden;
+	color: transparent;
+	margin-left:-5px;
+	margin-right:-5px;
+	
+}
+.tasks-backlink .internal-link {
+    -webkit-mask-image: url('data:image/svg+xml,<svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>');
+	height: 1em;
+	width: 1em;
+	opacity: 0.6;
+}
+
+.tasks-backlink .internal-link:hover { opacity:1;}
+
+.tasks-edit, .tasks-postpone, .tasks-backlink .internal-link{display: inline-block; opacity:0.6; margin-left: 5px; -webkit-mask-size: contain; background-color: var(--tx1, var(--text-normal));vertical-align:middle;}
+.tasks-edit:hover, .tasks-postpone:hover, .tasks-backlink .internal-link:hover{opacity: 1;}
+.tasks-edit::after, .tasks-postpone::after, .tasks-backlink .internal-link::after {content:none;}
+
+/* .plugin-tasks-query-result .tasks-backlink {
+    float:right;
+} */
