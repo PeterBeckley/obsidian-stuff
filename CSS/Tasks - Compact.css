@@ -157,7 +157,7 @@ input[type=checkbox]:checked {
     -webkit-mask-image: url('data:image/svg+xml,<svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polygon points="13 19 22 12 13 5 13 19"/><polygon points="2 19 11 12 2 5 2 19"/></svg>');
 }
 
-/* Backlink button */
+/* Backlink button - Collapse it to 'icon' size */
 .tasks-backlink {
     text-indent:100%;
 	white-space: nowrap;
@@ -167,6 +167,8 @@ input[type=checkbox]:checked {
 	margin-right:-5px;
 	
 }
+
+/* Backlink button - replace the default emoji */
 .tasks-backlink .internal-link {
     -webkit-mask-image: url('data:image/svg+xml,<svg enable-background="new 0 0 24 24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>');
 	height: 1em;
@@ -174,8 +176,8 @@ input[type=checkbox]:checked {
 	opacity: 0.6;
 }
 
+/* Combine some shared stylings */
 .tasks-backlink .internal-link:hover { opacity:1;}
-
 .tasks-edit, .tasks-postpone, .tasks-backlink .internal-link{display: inline-block; opacity:0.6; margin-left: 5px; -webkit-mask-size: contain; background-color: var(--tx1, var(--text-normal));vertical-align:middle;}
 .tasks-edit:hover, .tasks-postpone:hover, .tasks-backlink .internal-link:hover{opacity: 1;}
 .tasks-edit::after, .tasks-postpone::after, .tasks-backlink .internal-link::after {content:none;}
