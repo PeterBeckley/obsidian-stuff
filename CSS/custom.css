@@ -1,29 +1,11 @@
 /* Most of my customizations for Obsidian via CSS are here */
 
-/* Learn more if you need to - https://www.nordtheme.com/docs/colors-and-palettes 
-I don't use these currently, just too lazy to remove in case I have ref'd them somewhere*/
-:root{
-	--nord0: #2e3440;
-	--nord1: #3b4252;
-	--nord2: #434c5e;
-	--nord3: #4c566a;
-	--nord4: #d8dee9;
-	--nord5: #e5e9f0;
-	--nord6: #eceff4;
-	--nord7: #8fbcbb;
-	--nord8: #88c0d0;
-	--nord9: #81a1c1;
-	--nord10: #5e81ac;
-	--nord11: #bf616a;
-	--nord12: #d08770;
-	--nord13: #ebcb8b;
-	--nord14: #a3be8c;
-	--nord15: #b48ead;
+/* I want to see the weekends, no one has options to see these anymore, not gMail, Outlook, or anything in Obsidian. Recognizes OS Dark mode through Obsidian now*/
+.theme-light #calendar-container .weekend {
+  background-color: #9bd4df !important;
 }
-
-/* I want to see the weekends, no one has options to see these anymore, not gMail, Outlook, or anything in Obsidian. */
-#calendar-container .weekend {
-  background-color: #2E3132 !important;	
+.theme-dark #calendar-container .weekend {
+  background-color: #004754 !important;
 }
 /* Better dot colors for my Minimal theme config */
 .dot.filled { fill: #647B83 !important;
@@ -97,7 +79,7 @@ Use "hide_properties" in `css_classes` property to hide them.
     display: none;
 } */
 
-/* Psudo 'Swimlanes' for Kanban, wish the Dev would implement this (and better)! */
+/* Psudo 'Swim lanes' for Kanban, wish the Dev would implement this (and better)! */
 
 .kanban-plugin__board > div {
     display: grid;
@@ -107,3 +89,6 @@ Use "hide_properties" in `css_classes` property to hide them.
 .kanban-plugin__scroll-container.kanban-plugin__horizontal {
     overflow-y: auto;
 }
+
+/* Shrink the cards in Minimal Theme to something more manageable. I hate scrolling pages down because of a 1.3em margin */
+span.el-p p {margin-top:0;margin-bottom:0;}
