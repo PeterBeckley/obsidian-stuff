@@ -2,7 +2,7 @@
 const goalPage = dv.page(input.file);
 const projects = goalPage.file.inlinks.where((p) => {
     const mp = dv.page(p.path);
-    return mp.tags?.includes("project");
+    return mp.tags?.includes("project") && mp.status?.includes("In Progress");//Limit to active projects only
 });
 
 const totalGoalTasksCompleted = goalPage.file.tasks.where(
