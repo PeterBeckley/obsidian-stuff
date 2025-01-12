@@ -1,4 +1,4 @@
-#Periodic Templates
+# Periodic Templates
 
 I use these to manage most of my schedule, and to log habits and other journal-worthy information. These template files are how I keep my life (mostly) organized, they do that by filling/ sharing information up and down levels (Monthly <-> Weekly <-> Daily). This allows me see both detailed and wide-angle scopes of my life.
 
@@ -35,3 +35,4 @@ did I get everything done today that I planned? Let's evaluate that. This and th
 ### Journal
 yep, the normal/standard journaling space where I write all the random stuff running through my head. I have a few inline tags that I use here that feed dataviews in other notes, like "MSL" (helps me keep track of plans and changes to my Obsidian) and "Empire" (track changes, plans, and a place to stream-think about my businesses).
 
+![2025-01-12_09-39-29](https://github.com/user-attachments/assets/cab4ee91-5e79-4a4d-8cb6-268f18992a97)
