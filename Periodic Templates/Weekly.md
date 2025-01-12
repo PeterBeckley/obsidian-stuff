@@ -44,3 +44,6 @@ Self-explanatory, I think. In reviewing my week, identify at least one thing tha
 
 ## Metadata
 These are weekly tasks that I do track with the Tasks plugin so they show up in my daily notes and my 'Taskers' sidebar when they should.
+
+![2025-01-12_09-47-30](https://github.com/user-attachments/assets/71fdc02a-b4bf-428a-bf94-380b3cca3a32)
+
