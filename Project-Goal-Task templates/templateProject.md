@@ -1,12 +1,15 @@
 ---
-tags: project
+up: "[[Project Board]]"
 status: 
-created: <% tp.file.creation_date() %>
+created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
+aliases: "{{VALUE:Alias}}"
+tags:
+  - project
 ---
 %%
 ```js quickadd
 const goalNotes = DataviewAPI.pages("#goal").where(
-    (p) => !p.file.path.includes("template")
+    (p) => !p.file.path.includes("template") && !p.area.includes("Archive")
 ).values;
 const targetGoal = await this.quickAddApi.suggester(
     goalNotes.map((p) => p.file.name),
@@ -18,7 +21,7 @@ let markdownLink = this.app.fileManager.generateMarkdownLink(
     ""
 );
 markdownLink = `${markdownLink.slice(0, markdownLink.length - 2)}|${
-    targetGoal.alias
+    targetGoal.aliases
 }${markdownLink.slice(markdownLink.length - 2)}`;
 return `Goal:: ${markdownLink}`;
 ```
