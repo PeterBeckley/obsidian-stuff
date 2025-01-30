@@ -303,4 +303,7 @@ table.dataview tbody > tr > td {
     --cards-columns: repeat(7, minmax(0, 1fr)); }
 
   .cards-cols-8 {
-    --cards-columns: repeat(8, minmax(0, 1fr)); } }
+    --cards-columns: repeat(8, minmax(0, 1fr)); }
+	
+  .cards-cols-9 {
+    --cards-columns: repeat(9, minmax(0, 1fr)); } }
