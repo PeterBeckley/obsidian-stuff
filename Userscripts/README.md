@@ -1,0 +1,3 @@
+Here are userscripts I've written as part of my Obsidian vault workflow.
+
+newProject.js (QuickAdd) - (2.0) This gets called from a macro with the only step being to run this script. It creates new project notes for me by asking relevant questions about the project metadata. It also asks if I want to create a folder for project files on my hard drive. I don't like storing *everything* in my vault because file sizes can reach ~20-700MB. Since I'm an artist, these are typically templates, Clip Studio files, and perhaps spreadsheets and other docs; rarely a markdown file.
