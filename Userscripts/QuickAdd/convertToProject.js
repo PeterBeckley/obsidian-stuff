@@ -114,7 +114,6 @@ module.exports = async (params) => {
     // Inject project-related header
 const projectBody = `> [!Note|float-right no-t] Project
 > ${folderLink}
-# ${activeFile.basename}
 Project purpose: ${projectPurpose || ""}`;
 
     // Inject project-related footer

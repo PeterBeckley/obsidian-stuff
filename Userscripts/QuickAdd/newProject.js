@@ -114,7 +114,6 @@ created: ${new Date().toISOString().split('T')[0]}
 
 > [!Note|float-right no-t] Project
 > ${folderLink}
-# ${projectName}
 Project purpose: ${projectPurpose || ""}
 
 ## Desired End State
