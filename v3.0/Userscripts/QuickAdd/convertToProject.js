@@ -1,19 +1,23 @@
 module.exports = async (params) => {
-	// Create a new project note. It's a script because in my process at least one key's values are dynamically built from gathered Effort note aliases as well as my predefined 'Areas of Life'. Multiple efforts can be linked to by this project note.
-	// Use QuickAdd macro choice to trigger this script. I utilize Nick Milo's ACE folder structure.
-    const { app, quickAddApi, obsidian } = params;
+	/* Convert existing notes into project notes without losing the info they already contain.
+	Use QuickAdd macro choice to trigger the script on an open/active note. I utilize Nick Milo's ACE folder structure.*/
+	const { app, quickAddApi, obsidian } = params;
     const { Modal, Setting, Notice } = obsidian;
     const fs = require("fs");
+	// check for active note and fail if none
+    const activeFile = app.workspace.getActiveFile();
+    if (!activeFile) {
+        new Notice("No active file found. Open the note to convert first.");
+        return;
+    }
 
-    // 1. Basic Inputs
-    const projectName = await quickAddApi.inputPrompt("Project Name:");
-    if (!projectName) return; 
+    // Get projected related inputs
     const alias = await quickAddApi.inputPrompt("Alias:");
     let rank = await quickAddApi.inputPrompt("Rank (default 3):", "3", "3");
-    if (!rank) rank = "3";
+    if (!rank) rank = "3.5";
     const projectPurpose = await quickAddApi.inputPrompt("Project Purpose:");
 
-    // 2. Build Area Options
+    // Gather aoe options
     const hardcodedAOLs = ["QoL", "Health", "Fam/Relationships", "Finance", "Career", "Misc"]; 
     let menuOptions = [];
     hardcodedAOLs.forEach(aol => menuOptions.push({ label: aol, value: `${aol}` }));
@@ -30,8 +34,8 @@ module.exports = async (params) => {
             menuOptions.push({ label: displayName, value: `[[${file.basename}|${displayName}]]` });
         }
     }
-
-    // 3. Build Modal
+    
+    // Build modal
     const selectedLinks = await new Promise((resolve) => {
         const modal = new (class extends Modal {
             constructor(app) {
@@ -43,16 +47,10 @@ module.exports = async (params) => {
                 const { contentEl } = this;
                 contentEl.empty();
                 contentEl.createEl("h2", { text: "Select Areas of Effort" });
-                
-                // Create a container for the list
                 const listContainer = contentEl.createDiv();
                 listContainer.style.cssText = "max-height: 400px; overflow-y: auto; margin-bottom: 20px; border: 1px solid var(--background-modifier-border); padding: 10px; border-radius: 4px;";
-
-                // Use a DocumentFragment to batch the settings
                 const fragment = document.createDocumentFragment();
-                
                 menuOptions.forEach((opt) => {
-                    // Build the setting inside the fragment (off-screen)
                     new Setting(fragment)
                         .setName(opt.label)
                         .addToggle((t) => t.onChange((val) => {
@@ -60,12 +58,9 @@ module.exports = async (params) => {
                             else this.selected.delete(opt.value);
                         }));
                 });
-
                 listContainer.appendChild(fragment);
-
                 const footer = contentEl.createDiv({ cls: "modal-button-container" });
                 const btn = footer.createEl("button", { text: "OK", cls: "mod-cta" });
-                
                 btn.onclick = () => {
                     this.submitted = true;
                     resolve(Array.from(this.selected));
@@ -76,45 +71,59 @@ module.exports = async (params) => {
         })(app);
         modal.open();
     });
-
+    
     if (selectedLinks === null) return;
-
-    // 4. Folder & External logic (unchanged)
+    
+    // Project folder logic
     const folderOptions = ["Efforts/PROJECTS/Active", "Efforts/PROJECTS/Simmering"];
     const selectedFolder = await quickAddApi.suggester(folderOptions, folderOptions);   
     if (!selectedFolder) return; 
 
-    const useProjectFolder = await quickAddApi.yesNoPrompt(`Create external folder for ${projectName}?`);
+    const useProjectFolder = await quickAddApi.yesNoPrompt(`Create external folder for ${activeFile.basename}?`);
     let folderLink = "";
     if (useProjectFolder) {
-        const fullPath = `D:\\Projects\\${projectName}`;
+        const fullPath = `D:\\Projects\\${activeFile.basename}`;
         try {
             if (!fs.existsSync(fullPath)) fs.mkdirSync(fullPath, { recursive: true });
-            folderLink = `[📁 Project Files](<file:///D:/Projects/${projectName}>)`;
+            folderLink = `[📁 Project Files](<file:///D:/Projects/${activeFile.basename}>)`;
         } catch (err) { new Notice(`Error: ${err.message}`); }
     }
+    
+    // Update frontmatter
+    await app.fileManager.processFrontMatter(activeFile, (fm) => {
+        if (alias) {
+            if (!fm.aliases) fm.aliases = [];
+            else if (!Array.isArray(fm.aliases)) fm.aliases = [fm.aliases];
+            if (!fm.aliases.includes(alias)) fm.aliases.push(alias);
+        }
+        fm.rank = Number(rank);
+        fm.archive = false;
+		fm.estatus = "Working";
+        if (!fm.categories) fm.categories = [];
+        else if (!Array.isArray(fm.categories)) fm.categories = [fm.categories];
+        if (!fm.categories.includes("[[Projects]]")) fm.categories.push("[[Projects]]");
+        
+        if (selectedLinks.length > 0) {
+            if (!fm.aoe) fm.aoe = [];
+            else if (!Array.isArray(fm.aoe)) fm.aoe = [fm.aoe];
+            selectedLinks.forEach(link => {
+                if (!fm.aoe.includes(link)) fm.aoe.push(link);
+            });
+        }
+    });
+	
+	// Prepare the folder line for the callout
+    const folderLine = folderLink ? `> ${folderLink}\n` : "";
+	
+    // Inject project-related header
+const projectBody = `> [!effort|float-right no-t] Efforts
+${folderLine}> **Status:** \`INPUT[UpdateProjectStatus][:estatus]\`
+> \`BUTTON[nextAction]\`
 
-    // 5. Generate Content
-    const aoeYaml = selectedLinks.length > 0 
-        ? "\n" + selectedLinks.map(link => `  - "${link}"`).join("\n")
-        : "";
+Project purpose: ${projectPurpose || ""}`;
 
-    const fileContent = `---
-up:
-aliases: ${alias || ""}
-aoe:${aoeYaml}
-archive: false
-collections:
-  - "[[Projects]]"
-rank: ${rank}
-related:
-tags:
-created: ${new Date().toISOString().split('T')[0]}
----
-
-> [!Note|float-right no-t] Project
-> ${folderLink}
-Project purpose: ${projectPurpose || ""}
+    // Inject project-related footer
+const footerContent = `
 
 ## Desired End State
 (req'd) What does that look like? How does accomplish the goal or move the needle on the effort?
@@ -140,12 +149,30 @@ Project purpose: ${projectPurpose || ""}
 (optional, believe it or not) Are the any obvious or core phase boundaries to help mark progress with this project. I can't imagine most of your projects are big enough to need this, but it's good to highlight at the start.
 `;
 
-    // 6. Create File
-    const vaultPath = `${selectedFolder}/${projectName}.md`;
-    if (app.vault.getAbstractFileByPath(vaultPath)) {
-        new Notice("A note with this name already exists!");
-        return;
+    await app.vault.process(activeFile, (data) => {
+        const yamlEndIndex = data.indexOf("---", 3);
+        let contentStart = (data.startsWith("---") && yamlEndIndex > -1) ? yamlEndIndex + 3 : 0;
+
+        const yamlPart = data.substring(0, contentStart);
+        let bodyPart = data.substring(contentStart).trim(); // Trim both ends to control spacing
+
+        // Remove the existing first H1 header
+        const h1Regex = /^#\s+.+?\n/m;
+        bodyPart = bodyPart.replace(h1Regex, "");
+
+        // Construct final file: YAML + Top Injection + Old Body + Footer
+        return yamlPart + "\n" + projectBody + "\n" + bodyPart + "\n" + footerContent;
+    });
+
+    // Move to appropriate effort folder
+    const newPath = `${selectedFolder}/${activeFile.basename}.md`;
+    if (activeFile.path !== newPath) {
+        const existingFile = app.vault.getAbstractFileByPath(newPath);
+        if (existingFile) {
+            new Notice("Updated content, but a note with this name already exists in destination.");
+        } else {
+            await app.fileManager.renameFile(activeFile, newPath);
+            new Notice(`Project converted and moved.`);
+        }
     }
-    const newFile = await app.vault.create(vaultPath, fileContent);
-    await app.workspace.getLeaf().openFile(newFile);
 };

@@ -1,0 +1,7 @@
+Here are userscripts I've written as part of my Obsidian vault workflow.
+
+newProject.js (QuickAdd) - (3.0) This gets called from a macro with the only step being to run this script. It creates new project notes for me by asking relevant questions about the project metadata. It also asks if I want to create a folder for project files on my hard drive. I don't like storing *everything* in my vault because file sizes can reach ~20-700MB. Since I'm an artist, these are typically templates, Clip Studio files, and perhaps spreadsheets and other docs; rarely a markdown file.
+
+convertToProject.js (QuickAdd) - (3.0) This gets called from a macro with the only step being to run this script. It converts any active note into a "project" note in my vault. It asks me for the relevant info, then adds the new YAML, header, and footer text while leaving existing content in place. I use this if I've created a quick/basic note sometime in the past and now realize that I like the idea or whatever enough to dedicate some bandwidth to it. It wasn't a simmering project before, I didn't think of it as a project when I first made the note.
+
+failProject.js (QuickAdd) - (3.0) Sometimes projects no longer serve their object, me, or the effort they were for. This script quickly archives, reranks, and move the note appropriately. I go back at the end of the year and review these for lessons learned so I get better at defining projects, understanding scopes and my capacities.

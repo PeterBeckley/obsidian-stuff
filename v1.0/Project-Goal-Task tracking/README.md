@@ -1,6 +1,8 @@
+**This is v1.0 of my effort tracking system. It will work if implemented instead of my updated method. They are mutually exclusive, don't use both.**
+
 I use Templater, Kanban, Tasks, MetaEdit, and QuickAdd plugins to make this part of my Obsidian run.
 
-I've borrowed heavily from several sources for goal setting, project management, and task tracking. Most notably is Christian Houmann, who has a pretty slick method incorporating Kanban boards for goals and projects. It was a good jumping off point, but some of his stuff didn't work as advertised, and I'm not coder so it took some real effort to work through the JavaScript and dashboard queries to make something work smarter. That's what I have here. I'm not knocking what he's provided step-by-step for free, I just needed something a bit better. This is that.
+I've borrowed heavily from several sources for goal setting, project management, and task tracking. Most notably is Christian Houmann, who has a pretty slick method incorporating Kanban boards for goals and projects. It was a good jumping off point, but some of his stuff didn't work as advertised, and I'm not coder so it took some real effort to work through the JavaScript and dashboard queries to make something work smarter. That's what I have here. I'm not knocking what he's provided step-by-step for free, I just needed something a bit better. This is that. Essentially, you follow his steps for setting this up, but use my templates and views for a more refined experience. https://bagerbach.com/blog/projects-and-goals-obsidian/
 
 I also tend to generally follow the hierarchy that Nicole van der Hoeven for goals, projects, and tasks and how they tie into periodic notes. She has excellent information concerning her Obsidian system on YouTube. I think she might even have a course or two, if that's your thing.
 
