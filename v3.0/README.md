@@ -5,6 +5,7 @@ The biggest shifts from v1 is less reliance on the *Dataview* plugin in favor of
 
 If you wish to incorporate this system into your vault, this is the assumed starting folder structure for scripts, templates, plugin configs, everything (not exhaustive/complete):
 
+```
 +
 Atlas
 ..DOTS
@@ -39,6 +40,7 @@ X
 ..Tips and Tricks.md
 ..Useful Snippets.md
 Dashboard.md
+```
 
 ## Theme
 While v3 is theme agnostic, like v1, I've switched from using Primary or ITS to the AnuPpucin theme. I'm using several "add on" css files by the theme author to add extra options via the *Style Settings* plugin. I'm also using several of the css files generously made available by the ITS theme creator for use with other themes to keep some visual consistency I first implemented in v1. Nothing of my Primary theme implementation or customization remains and it unfortunately seems like that theme project is no longer under active development or maintenance.
