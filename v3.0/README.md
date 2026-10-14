@@ -53,6 +53,7 @@ Templates that generate effort notes (projects and supporting intel).
 
 ### Periodic notes
 Used via the Periodic Notes, Templater, QuicAdd, and other plugins/scripts to create the periodic notes in the various Calendar sub-folders.
+- tWeekly.md - Called by Periodic Notes (plugin). Uses Bases (Obsidian), Tasks (plugin), and Templater (plugin) to build. I removed the meal-planning portion, but otherwise this is my current template for weekly notes.
 
 ## Plugins
 tbd, but will likely include my Quick Add and Meta Bind configurations at some point to help others implement v3 if they wish.
