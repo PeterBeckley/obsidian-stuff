@@ -49,7 +49,7 @@ While v3 is theme agnostic, like v1, I've switched from using Primary or ITS to 
 Broken down further by function/system within META 3.0 that uses them.
 
 ### Effort tracking
-Templates that generate effort notes (projects and supporting intel). 
+In 3.0 all of these note types are generated with userscripts via QuickAdd (plugin). 
 
 ### Periodic notes
 Used via the Periodic Notes, Templater, QuicAdd, and other plugins/scripts to create the periodic notes in the various Calendar sub-folders.
